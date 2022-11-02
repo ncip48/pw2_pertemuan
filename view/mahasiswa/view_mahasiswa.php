@@ -26,7 +26,7 @@ include('./config/config.php');
                                                 <form id="search" method="GET" action="">
                                                     <div class="form-group">
                                                         <input type="hidden" name="page" value="mahasiswa">
-                                                        <input type="text" name="query" class="form-control" id="query" placeholder="cari..." autocomplete="off">
+                                                        <input type="text" name="query" class="form-control" id="query" placeholder="cari..." autocomplete="off" value="<?= $_GET['query'] ?>">
                                                     </div>
                                                 </form>
                                             </div>
@@ -71,6 +71,7 @@ include('./config/config.php');
                                                     $sql = "SELECT * FROM tb_mahasiswa";
                                                 }
                                                 $query = mysqli_query($sambung, $sql);
+                                                $jumlah = mysqli_num_rows($query);
                                                 $nomor = 1;
                                                 while ($mhs = mysqli_fetch_array($query)) {
                                                     echo "<tr>";
@@ -86,6 +87,11 @@ include('./config/config.php');
                                                     echo "</td>";
                                                     echo "</tr>";
                                                     $nomor++;
+                                                }
+                                                if ($jumlah == 0) {
+                                                    echo "<tr>";
+                                                    echo "<td colspan='7' class='text-center'>Data tidak ditemukan</td>";
+                                                    echo "</tr>";
                                                 }
                                                 ?>
                                             </tbody>
